@@ -10,7 +10,7 @@
     "@types/lodash.shuffle": "^4.2.6",
     "@types/node": "^14.0.1",
     "@types/react-dom": "^16.9.8",
-    "immer": "^6.0.5",
+    "immer": "^9.0.6",
     "lodash.shuffle": "^4.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
