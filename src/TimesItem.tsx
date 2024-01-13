@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const StyledTimesItem = styled.li<{ $isDragging: boolean }>`
+const StyledTimesItem = styled.li<{ $isPeeking: boolean }>`
   font-size: 2.5rem;
 
   text-align: right;
@@ -27,7 +27,6 @@ const StyledTimesItem = styled.li<{ $isDragging: boolean }>`
     position: relative;
     text-align: center;
     .cover {
-      transition: none;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -38,7 +37,19 @@ const StyledTimesItem = styled.li<{ $isDragging: boolean }>`
       left: 0;
       right: 0;
       color: white;
-      opacity: ${(props) => (props.$isDragging ? 0.01 : 1)};
+      animation: ${(props) =>
+        props.$isPeeking ? 'show-answer 2s ease-in-out' : null};
+      @keyframes show-answer {
+        0% {
+        }
+        10% {
+          /* reported bug in some iOS where multiple of 90 degrees rotations are ignored */
+          transform: translateX(2.25em);
+        }
+        90% {
+          transform: translateX(2.25em);
+        }
+      }
     }
   }
 `;
@@ -49,37 +60,30 @@ type Props = {
 };
 
 function TimesItem(props: Props) {
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleDragStart = (event: React.DragEvent<HTMLSpanElement>) => {
-    setIsDragging(true);
-
-    // var img = new Image();
-    // img.src =
-    //   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-    // event.dataTransfer.setDragImage(img, 0, 0);
+  const [isPeeking, setIsPeeking] = useState(false);
+  const handleAnswerAnimationEnd = () => {
+    setIsPeeking(false);
   };
-
-  const handleDragEnd = (event: React.DragEvent<HTMLSpanElement>) => {
-    event.preventDefault(); // prevent the browser's default drag end behavior
-    setIsDragging(false);
+  const handlePeekClick = () => {
+    setIsPeeking(true);
   };
 
   return (
-    <StyledTimesItem $isDragging={isDragging}>
+    <StyledTimesItem $isPeeking={isPeeking}>
       <div className="question">
         {props.stage} <span className="times">X</span> {props.factor} ={' '}
       </div>
       <div className="answer">
-        <span className="answer">{props.stage * props.factor}</span>
-        <span
-          className="cover"
-          draggable
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
+        <button
+          className="answer"
+          onClick={handlePeekClick}
+          onAnimationEnd={handleAnswerAnimationEnd}
         >
-          ?
-        </span>
+          {props.stage * props.factor}
+          <span className="cover" draggable>
+            ?
+          </span>
+        </button>
       </div>
     </StyledTimesItem>
   );
