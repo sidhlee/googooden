@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import produce from 'immer';
+import { produce } from 'immer';
 
 export function useImmer(initialState: any) {
   const [state, setState] = useState(initialState);

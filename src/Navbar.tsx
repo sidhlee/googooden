@@ -11,27 +11,28 @@ const StyledNavbar = styled.nav`
   max-width: 1400px;
   margin: 2em auto var(--y-spacer);
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
   ul {
     min-width: 60%;
-    height: 5rem;
     display: block;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     flex: 1 1 auto;
+    gap: 1rem;
     li {
-      width: 100%;
-      height: 100%;
+      flex: 1;
       padding: 0.5em 0;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       button {
         font: inherit;
@@ -63,7 +64,7 @@ const StyledNavbar = styled.nav`
   .nav-buttons {
     display: flex;
     justify-content: center;
-    margin: 0.5em 1rem;
+    margin: 2rem 1rem 0;
   }
 `;
 
@@ -78,20 +79,22 @@ function Navbar(props: Props) {
   return (
     <StyledNavbar>
       <ul>
-        {[...Array(8)].map((_, i) => (
-          <li
-            key={i}
-            className={`${i + 2 === props.stage ? 'active' : null}`}
-            onClick={props.handleStageClick.bind(null, i + 2)}
-          >
-            <button>{i + 2} 단</button>
-          </li>
-        ))}
+        {[2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19].map(
+          (v, i) => (
+            <li
+              key={v}
+              className={`${v === props.stage ? 'active' : null}`}
+              onClick={() => props.handleStageClick(v)}
+            >
+              <button>{v}</button>
+            </li>
+          )
+        )}
       </ul>
       <div className="nav-buttons">
-        <Button handleClick={props.handleScrambleClick}>섞어주세요!</Button>
+        <Button handleClick={props.handleScrambleClick}>Shuffle!</Button>
         <Button outline={true} handleClick={props.handleResetOrderClick}>
-          원래대로
+          Reset
         </Button>
       </div>
     </StyledNavbar>

@@ -11,7 +11,7 @@ const outlineCss = css`
   }
 `;
 
-const StyledButton = styled.button<{ outline: boolean | undefined }>`
+const StyledButton = styled.button<{ $outline: boolean | undefined }>`
   flex-basis: auto;
   margin-left: 0.75em;
   display: block;
@@ -31,7 +31,7 @@ const StyledButton = styled.button<{ outline: boolean | undefined }>`
     top: 1px;
     left: 1px;
   }
-  ${(props) => (props.outline ? outlineCss : null)}
+  ${(props) => (props.$outline ? outlineCss : null)}
 `;
 
 type ButtonProps = {
@@ -41,7 +41,7 @@ type ButtonProps = {
 };
 function Button(props: ButtonProps) {
   return (
-    <StyledButton outline={props.outline} onClick={props.handleClick}>
+    <StyledButton $outline={props.outline} onClick={props.handleClick}>
       {props.children}
     </StyledButton>
   );

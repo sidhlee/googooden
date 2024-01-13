@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const StyledTimesItem = styled.li<{ isPeeking: boolean }>`
-  font-size: 3rem;
+const StyledTimesItem = styled.li<{ $isPeeking: boolean }>`
+  font-size: 2.5rem;
 
   text-align: right;
   display: flex;
@@ -38,7 +38,7 @@ const StyledTimesItem = styled.li<{ isPeeking: boolean }>`
       right: 0;
       color: white;
       animation: ${(props) =>
-        props.isPeeking ? 'show-answer 1s ease-out' : null};
+        props.$isPeeking ? 'show-answer 1s ease-out' : null};
       @keyframes show-answer {
         0% {
           opacity: 0;
@@ -68,7 +68,7 @@ function TimesItem(props: Props) {
   };
 
   return (
-    <StyledTimesItem isPeeking={isPeeking}>
+    <StyledTimesItem $isPeeking={isPeeking}>
       <div className="question">
         {props.stage} <span className="times">X</span> {props.factor} ={' '}
       </div>

@@ -27,7 +27,7 @@ type Props = {
 };
 
 function TimesTable(props: Props) {
-  const items = Array.from({ length: 9 }, (_, i) => i).map((i) => (
+  const items = Array.from({ length: 18 }, (_, i) => i).map((i) => (
     <TimesItem
       key={props.factors[i]}
       stage={props.stage}

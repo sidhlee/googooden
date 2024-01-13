@@ -7,7 +7,9 @@ import Navbar from './Navbar';
 // import { TimesItem, initialTimesItems } from './models/TimesItem';
 // import { useImmer } from './hooks/useImmer';
 
-const initialFactors = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const initialFactors = [
+  2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+];
 
 function App() {
   // TODO - connect to firebase
